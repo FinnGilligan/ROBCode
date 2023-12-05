@@ -24,7 +24,7 @@ public class JoystickCMD extends CommandBase {
 
     @Override 
     public void execute(){
-        rob.setMotors(xSpd.get(), ySpd.get());
+        rob.setMotors(xSpd.get(), -ySpd.get());
     }
 @Override 
 public void end(boolean interrupted){}

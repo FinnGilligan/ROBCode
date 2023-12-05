@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.*;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Potentiometer;
@@ -24,6 +25,7 @@ public class RobotContainer {
   public final Joystick joystick = new Joystick(OperatorConstants.kDriverControllerPort);
   public final Drivetrain rob = new Drivetrain();
   public final Potentiometer potentiometer = new Potentiometer();
+  public final Arm arm = new Arm();
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -34,6 +36,11 @@ public class RobotContainer {
       rob,
       () -> joystick.getRawAxis(0),
       () -> joystick.getRawAxis(1)
+    ));
+
+    arm.setDefaultCommand(new ArmCommand(arm, 
+    potentiometer,
+    () ->joystick.getRawAxis(5)
     ));
   
     // Configure the trigger bindings
