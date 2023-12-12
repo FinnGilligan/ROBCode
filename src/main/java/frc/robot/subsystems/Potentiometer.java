@@ -22,6 +22,10 @@ public class Potentiometer extends SubsystemBase{
         return potEncoder.getSelectedSensorPosition();
     }
 
+    public static void zeroPot() {
+        potEncoder.setSelectedSensorPosition(0);
+    }
+
     @Override
     public void periodic() {
       // This method will be called once per scheduler run

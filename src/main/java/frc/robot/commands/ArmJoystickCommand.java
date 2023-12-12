@@ -6,15 +6,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Potentiometer;
 
-public class ArmCommand extends CommandBase{
+public class ArmJoystickCommand extends CommandBase{
     Arm arm = new Arm();
     Potentiometer pot;
-    public double desiredPos;
+    Supplier<Double> joystick;
+    public static double desiredPos;
 
-    public ArmCommand(Arm arm, Potentiometer pot, double pos) {
+    public ArmJoystickCommand(Arm arm, Potentiometer pot, Supplier<Double> joystick) {
         this.arm = arm;
         this.pot = pot;
-        this.desiredPos = pos;
+        this.joystick = joystick;
         addRequirements(arm);
     }
 
@@ -22,7 +23,7 @@ public class ArmCommand extends CommandBase{
 
     @Override
     public void execute() {
-        arm.SetMotors(desiredPos);
+        arm.SetMotorsManual(-joystick.get());
     }
 
     @Override
@@ -30,6 +31,6 @@ public class ArmCommand extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        return Math.abs(Potentiometer.readPot() + desiredPos) < 5;
+        return false;
     }
 }
